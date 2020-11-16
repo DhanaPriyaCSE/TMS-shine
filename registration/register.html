@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Shine</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="rgform.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="wrapper">
+        <h2>Registration form</h2>
+        <div class="form-container">
+            <form>
+                <div class="input-name">
+                    <i class="fa fa-user lock"></i>
+                    <input text="text" placeholder="First Name" class="name">
+                    <span>
+                      <i class="fa fa-user lock"></i>
+                      <input text="text" placeholder="First Name" class="name">
+                    </span>
+                </div>
+                <div class="input-name">
+                    <i class="fa fa-envelope email"></i>
+                    <input text="email" placeholder="Email" class="text-name" required>
+                </div>
+                <div class="input-name">
+                    <i class="fa fa-lock lock"></i>
+                    <input text="password" placeholder="Password" class="text-name" required>
+                </div>
+                <div class="input-name">
+                    <i class="fa fa-lock lock"></i>
+                    <input text="password" placeholder="Re-type Password" class="text-name" required>
+                </div>
+
+                <!-- <div class="input-name">
+                     <i class="fa fa-lock lock"></i>
+                    <input text="radio" name="radiogroup1" id="male" class="radio-button">
+                    <label for="male" class="gender">Male</label>
+                    <input text="radio" name="radiogroup1" id="female" class="radio-button">
+                    <label for="female" class="gender">Female</label>
+                </div> -->
+
+                <div class="input-name">
+                    <select class="type-of-user">
+                        <option>Select a User-type</option>
+                        <option>Admin</option>
+                        <option>Student</option>
+                        <option>Teacher</option>
+                    </select>
+                    <div class="arrow"></div>
+                </div>
+                <div class="input-name">
+                    <i class="fa fa-lock lock"></i>
+                    <input text="submit" class="button" value="Register">
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>
