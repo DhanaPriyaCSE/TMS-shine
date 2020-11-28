@@ -18,7 +18,7 @@ label {
 .container-body {
     background-color: rgb(255, 255, 255);
     box-shadow: 5px 5px rgb(12, 12, 29);
-    /* padding: 20px; */
+    padding: 20px;
     font-size: 22px rgb(12, 12, 29);
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-weight: 400;

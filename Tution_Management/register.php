@@ -42,7 +42,7 @@ Responsive Registration Form</h2>
                 <div class="input-name">
                     <select class="country role" name="role">
                         <option disabled>Select a role</option>
-                        <option>Admin</option>
+                        <!-- <option>Admin</option> -->
                         <option>Teacher</option>
                         <option>Student</option>
                    </select>
@@ -67,6 +67,10 @@ Responsive Registration Form</h2>
                   <div class="input-name">
                         <input class="button" type="submit" name='register' value="Register" />
                     </div>
+                    <span class="last">
+                     <a href="../Tution_Management/index.php">Already have an account</a> 
+                     <i class="fa fa-question lock"></i>
+                    </span>
 </form>
 </div>
 </div>

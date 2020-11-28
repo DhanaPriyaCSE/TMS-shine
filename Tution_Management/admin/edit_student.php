@@ -31,6 +31,19 @@ $address=$row["address"];
 $parent_no=$row["parent_no"];
 $course=$row["course"];
 }
+
+$fees_type="";
+$amount="";
+$status="";
+$date="";
+$fees=mysqli_query($con,"select * from student_fees_details where student_id='$student_id'");
+while($row=mysqli_fetch_array($fees))
+{
+$fees_type=$row["fees_type"];
+$amount=$row["amount"];
+$status=$row["status"];
+$date=$row["date"];
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -126,29 +139,67 @@ $course=$row["course"];
          </div>
          <br>
          <div class="title">Personal details</div>
-          <div class="form-row top">
-            <div class="form-group col-md-6">
-              <label for="inputEmail4">Father's Name</label>
-              <input type="text" class="form-control" id="inputEmail4" name="fa_name" placeholder="Father's Name" value="<?php echo $fa_name; ?>">
-            </div>
-            <div class="form-group col-md-6">
-              <label for="inputPassword4">Mather's Name</label>
-              <input type="text" class="form-control" id="inputPassword4" name="ma_name" placeholder="Mather's Name" value="<?php echo $ma_name; ?>">
-            </div>
-         </div>
+            <div class="form-row top">
+              <div class="form-group col-md-6">
+                <label for="inputEmail4">Father's Name</label>
+                <input type="text" class="form-control" id="inputEmail4" name="fa_name" placeholder="Father's Name" value="<?php echo $fa_name; ?>">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="inputPassword4">Mather's Name</label>
+                <input type="text" class="form-control" id="inputPassword4" name="ma_name" placeholder="Mather's Name" value="<?php echo $ma_name; ?>">
+              </div>
+          </div>
     
-         <div class="form-row">
-            <div class="form-group col-md-6">
-              <label for="inputPassword4">Parents No.</label>
-              <input type="text" class="form-control" id="inputPassword4" name="parent_no" placeholder="Parents No." value="<?php echo $ph_no; ?>">
-            </div>
-            <div class="form-group col-md-6">
-              <label for="inputPassword4">Address</label>
-              <textarea class="form-control" rows="5" id="comment" placeholder="enter your address" name="address" >
-              <?php echo $address; ?>
-              </textarea>
-            </div>
-         </div>
+          <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="inputPassword4">Parents No.</label>
+                <input type="text" class="form-control" id="inputPassword4" name="parent_no" placeholder="Parents No." value="<?php echo $ph_no; ?>">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="inputPassword4">Address</label>
+                <textarea class="form-control left" rows="5" id="comment" placeholder="enter your address" name="address" >
+                <?php echo $address; ?>
+                </textarea>
+              </div>
+          </div>
+          <div class="title">Fees details</div>
+            <div class="form-row top">
+                <div class="form-group col-md-6">
+                  <label for="inputEmail4">Fees Type</label>
+                        <select class="form-control" name="fees_type">
+                          <option disabled>select</option>
+                          <option <?php if ($fees_type=='Annual'){ echo "selected";} ?> >Annual</option>
+                          <option <?php if ($fees_type=='Term'){ echo "selected";} ?>>Term</option>
+                          <option <?php if ($fees_type=='Monthly'){ echo "selected";} ?>>Monthly</option>
+                        </select>              
+                </div>
+              <div class="form-group col-md-6">
+                <label for="inputPassword4">Amount</label>
+                <input type="text" class="form-control"  id="inputPassword4" name="amount" placeholder="payment amount" value="<?php echo $amount; ?>">
+              </div>
+          </div>
+    
+          <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="inputPassword4">Fees status</label>
+                <div class="col-sm">
+                         <label class="radio-inline ">
+                           <input type="radio" name="status" value="paid" <?php if ($status=='paid'){ echo "checked";} ?> >&nbsp;Paid
+                         </label>
+                         <label class="radio-inline ">
+                           <input type="radio" name="status" value="pending" <?php if ($status=='pending'){ echo "checked";} ?> >&nbsp;Pending
+                         </label>
+                         <label class="radio-inline ">
+                           <input type="radio" name="status" value="notpaid" <?php if ($status=='notpaid'){ echo "checked";} ?> >&nbsp;Not paid
+                         </label>
+                   </div>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="inputPassword4">Date</label>
+                  <input type="date" name="date" class="form-control" value="<?php echo $date; ?>">&nbsp;
+
+              </div>
+          </div>
         
              <div class="form-group row">
                  <center class="col-sm-12">
@@ -178,6 +229,16 @@ mysqli_query($con,"update students set first_name='$_POST[f_name]', last_name='$
 school='$_POST[school_name]', dob='$_POST[DOB]',gender='$_POST[gender]',father_name='$_POST[fa_name]',mather_name='$_POST[ma_name]',
 parent_no='$_POST[parent_no]',address='$_POST[address]'  where student_id='$student_id'")  or die(mysqli_error($con));
 
+$result=mysqli_query($con,"select * from student_fees_details where student_id='$student_id'");
+if(mysqli_num_rows($result)==1){
+$result_update=mysqli_query($con,"update student_fees_details set fees_type='$_POST[fees_type]',
+ amount='$_POST[amount]',status='$_POST[status]',date='$_POST[date]'
+ where student_id='$student_id'")  or die(mysqli_error($con));
+}else{
+  mysqli_query($con,"INSERT INTO student_fees_details
+   (student_id,fees_type,amount,status,date)
+    values('$student_id','$_POST[fees_type]','$_POST[amount]','$_POST[status]','$_POST[date]')") or die(mysqli_error($con));
+}
 ?>
 
 <script type="text/javascript">

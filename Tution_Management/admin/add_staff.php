@@ -37,7 +37,7 @@ if(isset($_POST['ADD']))
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="../css/admission.css">
 <link rel="stylesheet" href="../css/fees.css">
-
+<link rel="stylesheet" href="../css/staff.css">
 </head>
 <body>
 
@@ -51,8 +51,13 @@ if(isset($_POST['ADD']))
       </div>
     
       <div class="container-body">
-         <form>
-         <div class="title">Staff details</div>
+         <form method="POST" action="">
+         <div class="title row">Staff details
+            <div class="form-group row col-sm-10">
+                <a href="view_staff.php" class="staff btn btn-primary">View Staffs</a>
+            </div>
+         </div>
+         
          <div class="form-row top">
            <div class="form-group col-md-6">
              <label for="inputEmail4">First Name</label>

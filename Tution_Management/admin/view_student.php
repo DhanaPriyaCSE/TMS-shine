@@ -16,6 +16,7 @@ include "admin_dashboard.php";
 ">
 </head>
 <body>
+
 <center>
 <div class="container">
      
@@ -24,6 +25,7 @@ include "admin_dashboard.php";
          <center><h1>Search Student</h1></center>
          </div>
      </div>
+     <br>
      <div class="container-body">
         <form action="" method="POST">
           <div class="form-row">

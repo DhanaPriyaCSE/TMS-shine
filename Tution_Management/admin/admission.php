@@ -19,15 +19,15 @@ if (isset($_POST['submit'])) {
 	$reg="INSERT INTO students(first_name,last_name,ph_no,email,dob,gender,course,school,father_name,mather_name,address,parent_no)
   VALUES('$first_name','$last_name','$ph_no','$email','$dob','$gender','$course','$school','$fa_name','$ma_name','$address','$parent_no')";
 	$query_run=mysqli_query($con,$reg) or die(mysqli_error($con));
-	if($query_run)
-	{
-	echo '<script>alert("ADMISSION SUCCESSFUL")</script>';
-    } 
-    else
-    {
-    	echo '<script>alert("ADMISSION  NOT SUCCESSFUL")</script>';
+	// if($query_run)
+	// {
+	// echo '<script>alert("ADMISSION SUCCESSFUL")</script>';
+  //   } 
+  //   else
+  //   {
+  //   	echo '<script>alert("ADMISSION  NOT SUCCESSFUL")</script>';
 
-    }
+  //   }
   }  
 ?>
 <!DOCTYPE html>
@@ -139,15 +139,23 @@ if (isset($_POST['submit'])) {
          </div>
         
              <div class="form-group row">
-                 <center class="col-sm-12">
-                   <input  type="submit"  name="submit" class="btn btn-primary">
-                 </center>	
+             <!-- <a href="add_fees.php" > -->
+                  <center class="col-sm-12">
+                        <button  type="button" Value="Next" id="next" class="btn btn-primary" > Next</button>
+                  </center>	
+              <!-- </a> -->
              </div>
           <form>
        </div>
        <div class="container-footer">
        </div>
      </div>
-
+ 
+     <script type="text/javascript">
+    alert($email); 
+    document.getElementById('next').onclick= function(){
+    location.href="../admin/add_fees.php";
+  }
+</script>
 </body>
 </html>

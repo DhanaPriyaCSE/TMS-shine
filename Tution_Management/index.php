@@ -51,7 +51,7 @@
                         <input class="button" type="submit" name='register' value="Login" />
                     </div>
                     <span class="last">
-                     <a href="../Tution_Management/register.php">Don't have account.</a> 
+                     <a href="../Tution_Management/register.php">Don't have account</a> 
                      <i class="fa fa-question lock"></i>
                     </span>
 
