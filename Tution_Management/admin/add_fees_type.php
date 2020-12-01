@@ -1,3 +1,18 @@
+<?php 
+
+session_start();
+$e=$_SESSION['email'];
+ //echo $_SESSION['email'];
+ if(!isset($e)){
+    echo "not logged in";
+    header("Location:../index.php");
+ }
+ else{
+    header("Location:../admin/add_fees_type.php");
+ }
+ include "../admin/nav.php";
+
+?>
 <?php
 include "nav.php";
 $con=mysqli_connect("localhost","root","","tution_management");

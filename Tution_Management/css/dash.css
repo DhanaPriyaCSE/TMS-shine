@@ -11,8 +11,8 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: #f7fcff;
-    overflow: scroll !important;
+    background: #f2f8f8;
+    overflow:hidden;
 }
 
 .container {

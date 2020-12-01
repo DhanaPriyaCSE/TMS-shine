@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 28, 2020 at 11:03 AM
+-- Generation Time: Dec 01, 2020 at 05:32 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.6
 
@@ -77,6 +77,13 @@ CREATE TABLE `fees_structure` (
   `status` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `fees_structure`
+--
+
+INSERT INTO `fees_structure` (`student_id`, `course`, `subject`, `fees_type`, `total_fees`, `paying_amount`, `remaining_amount`, `status`) VALUES
+(1, '6th', 'English', 'Monthly', 1000, 600, 400, 'pending');
+
 -- --------------------------------------------------------
 
 --
@@ -138,12 +145,22 @@ CREATE TABLE `students` (
   `dob` date NOT NULL,
   `gender` varchar(10) NOT NULL,
   `course` varchar(20) NOT NULL,
+  `subject` varchar(100) NOT NULL,
+  `caste` varchar(50) NOT NULL,
+  `image` varchar(255) NOT NULL,
   `school` varchar(100) NOT NULL,
   `father_name` varchar(50) NOT NULL,
   `mather_name` varchar(50) NOT NULL,
   `parent_no` bigint(20) NOT NULL,
   `address` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `students`
+--
+
+INSERT INTO `students` (`student_id`, `first_name`, `last_name`, `ph_no`, `email`, `dob`, `gender`, `course`, `subject`, `caste`, `image`, `school`, `father_name`, `mather_name`, `parent_no`, `address`) VALUES
+(1, 'Dhanapriya', 'k', 9790586716, 'yaspriya958@gmail.com', '0000-00-00', 'Female', '6th', 'English', 'MBC', '', 'mam', 'kanagaraj', 'muthukannu', 9876543212, 'mjbk');
 
 -- --------------------------------------------------------
 
@@ -233,7 +250,7 @@ ALTER TABLE `courses`
 -- AUTO_INCREMENT for table `fees_structure`
 --
 ALTER TABLE `fees_structure`
-  MODIFY `student_id` int(5) NOT NULL AUTO_INCREMENT;
+  MODIFY `student_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `fees_type`
@@ -251,7 +268,7 @@ ALTER TABLE `registration`
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `student_fees_details`

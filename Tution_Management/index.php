@@ -1,3 +1,7 @@
+<?php 
+ session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -113,18 +117,30 @@ if(isset($_POST['register']))
                   </script>
                     <?php
                     
-                    if($role=='Admin'){
-                      header("Location:../Tution_Management/admin/admin_dashboard.php");
-                    }
-                    elseif($role=='Teacher'){
-                      header("Location:../Tution_Management/staff/staff_dashboard.php");
+                    $_SESSION['email']=$email;
+                    echo $_SESSION['email'] ;
+                    if(!isset($_SESSION['email'])){
+                      header("Location:../Tution_Management/index.php");
                     }
                     else{
-                      header("Location:../Tution_Management/student/student_dashboard.php");
-                    }
-                    
+                      if($role=='Admin'){
+                        echo "success";
+                        $_SESSION['email']=$email;
+                        echo $_SESSION['email'];
+                        header("Location:../Tution_Management/admin/dash_board.php");
+                      }
+                      elseif($role=='Teacher'){
+                        $_SESSION['email']=$email;
+                        header("Location:../Tution_Management/staff/staff_dashboard.php");
+                      }
+                      else{
+                        $_SESSION['email']=$email;
+                        header("Location:../Tution_Management/student/student_dashboard.php");
+                      }
+                      
 
-                   }
+                    }
+                  }
                }
            }
 
