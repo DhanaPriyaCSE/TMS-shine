@@ -1,5 +1,5 @@
 <?php
-include "admin_dashboard.php";
+include "nav.php";
 ?>
 
 <!DOCTYPE html>
@@ -63,12 +63,10 @@ include "admin_dashboard.php";
               <tr>
                 <th scope="col">Student ID</th>
                 <th scope="col">First Name</th>
-                <th scope="col">Last Name</th>
-                <th scope="col">Course</th>
-                <th scope="col">Email</th>
-                <th scope="col">Ph No</th>
-                <th scope="col">Edit</th>
-                <th scope="col">Delete</th>
+                <th scope="col">Total Fees</th>
+                <th scope="col">Paid Amount</th>
+                <th scope="col">Remaining Amount</th>
+                
               </tr>
             </thead>
             <tbody>
@@ -79,10 +77,18 @@ include "admin_dashboard.php";
     if (isset($_POST['search'])) {
       $STUDENTID=$_POST['STUDENTID'];
     $COURSEOPTION=$_POST['COURSEOPTION'];
-    $query="SELECT * FROM students WHERE student_id='$STUDENTID' or course='$COURSEOPTION' ";
+       if($STUDENTID != " "){
+          $query=" SELECT S.student_id, S.first_name, F.total_fees,F.paying_amount,F.remaining_amount
+          FROM students S
+          INNER JOIN fees_structure F ON S.student_id=F.student_id where S.student_id='$STUDENTID' or S.course='$COURSEOPTION'";
+          }else{
+            echo "No Record Found";
+          }
     }
     else{
-      $query="SELECT * FROM students "; 
+      $query=" SELECT S.student_id, S.first_name, F.total_fees,F.paying_amount,F.remaining_amount
+    FROM students S
+    INNER JOIN fees_structure  F ON S.student_id=F.student_id";
            }
     
 		$query_run=mysqli_query($con,$query) or die(mysqli_error($con));
@@ -92,13 +98,9 @@ include "admin_dashboard.php";
      
 		<td><?php echo $row['student_id'];?></td>
 		<td><?php echo $row['first_name'];?></td>
-		<td><?php echo $row['last_name'];?></td>
-    <td><?php echo $row['course'];?></td>
-    <td><?php echo $row['email'];?></td>
-		<td><?php echo $row['ph_no'];?></td>
-		<td><a href="edit_student.php?student_id=<?php echo $row['student_id']; ?>" class="edit"> <i class="fa fa-pencil "></i>&nbsp;Edit</a></td>
-		<td><a href="delete_student.php?student_id=<?php echo $row['student_id']; ?>" class="delete"> <i class="fa fa-trash "></i>&nbsp;Delete</a></td>
-		
+		<td><?php echo $row['total_fees'];?></td>
+    <td><?php echo $row['paying_amount'];?></td>
+    <td><?php echo $row['remaining_amount'];?></td>
 		</tr>				
 
 		<?php

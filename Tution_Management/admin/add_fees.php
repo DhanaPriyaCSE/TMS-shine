@@ -1,111 +1,9 @@
-<!-- <?php
-include "nav.php";
-$con=mysqli_connect("localhost","root","","tution_management");
-if (isset($_POST['submit'])) {
-	$STUDENTID=$_POST['STUDENTID'];
-	$PAIDAMOUNT=$_POST['PAIDAMOUNT'];
-	$DATE=$_POST['DATE'];
-	$FEETYPE=$_POST['FEETYPE'];
-	$FEESTATUS=$_POST['FEESTATUS'];
-	$query="INSERT INTO fee(STUDENTID,PAIDAMOUNT,paiddate,FEETYPE,FEESTATUS)VALUES('$STUDENTID','$PAIDAMOUNT','$DATE','$FEETYPE','$FEESTATUS')";
-	$result=mysqli_query($con,$query);
-	if ($result) {
-		echo "inserted successfully";
-	}
-	else
-	{
-		echo "not inserted successfully";
-	}
-}
-?>-->
-<!--
-<!DOCTYPE html>
-<html>
-
-<head>
-	<title>add fee</title>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="../css/fees.css">
-</head>
-
-<body>
-<h2>Shine Tuition center</h2>
-     
-    <div class="container">
-     
-      <div class="container-head">
-          <div class="title">
-          <center><h1>Fees Management</h1></center>
-          </div>
-      </div>
-      <br>
-      <div class="container-body">
-         <form>
-            <div class="form-group row">
-                <label for="inputEmail3" class="col-sm-2 col-form-label">Student Id:</label>
-                <div class="col-sm-10">
-                  <input type="text" name="student_id" class="form-control" id="inputEmail3">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="inputPassword3" class="col-sm-2 col-form-label">Amount</label>
-                <div class="col-sm-10">
-                  <input type="text" name="paid_amount" class="form-control" id="inputPassword3">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="inputPassword3" class="col-sm-2 col-form-label">Date</label>
-                <div class="col-sm-10">
-                  <input type="date" name="paid_date" class="form-control" id="inputPassword3">
-                </div>
-            </div>
-            <div class="form-group row" >
-                <label for="inputPassword3" class="col-sm-2 col-form-label">Fees Type</label>
-                  <div class="col-sm-10">
-                      <select class="form-control" name="Fees_type">
-                        <option disabled>select</option>
-                        <option value="ANNUVAL">Annual</option>
-                        <option value="MONTHLY">Monthly</option>
-                        <option value="TERM">Term</option>
-                      </select>
-                  </div>
-            </div>
-            <div class="form-group row" >
-                  <label for="inputPassword3" class="col-sm-2 col-form-label">Fees status</label>
-                  <div class="col-sm-10">
-                        <label class="radio-inline col-sm-2">
-                          <input type="radio" name="fees_status" checked> &nbsp;Paid
-                        </label>
-                        <label class="radio-inline col-sm-2">
-                          <input type="radio" name="fees_status">&nbsp;Pending
-                        </label>
-                        <label class="radio-inline col-sm-2">
-                          <input type="radio" name="fees_status">&nbsp;Not Paid
-                        </label>
-                  </div>
-            </div>
-            <div class="form-group row">
-                <center class="col-sm-12">
-                  <input  type="submit" name="submit" class="btn btn-primary">
-                </center>	
-            </div>
-         <form>
-      </div>
-      <div class="container-footer">
-      </div>
-    </div>
-</body>
-</html> -->
-
-
 
 <?php
 
 include "nav.php";
 $con=mysqli_connect("localhost","root","","tution_management");
-
+  $student_id='';
   $course='';
 	$subject='';
 	$fees_type='';
@@ -113,41 +11,43 @@ $con=mysqli_connect("localhost","root","","tution_management");
   $paying_amount='';
   $remaining_amount='';
   $status='';
-  if (isset($_POST['search'])) {
+   //echo "<script>alert('success')</script>";
     $student_id=$_POST['student_id'];
-    echo($student_id);
-$query=mysqli_query($con,"select * from fees_structure where student_id='$student_id'") 
-or die(mysqli_error($con));
-while($row=mysqli_fetch_array($query)){
-  $course=$row['course'];
-	$subject=$row['subject'];
-	$fees_type=$row['fees_type'];
-  $total_fees=$row['total_fees'];
-  $paying_amount=$row['paying_amount'];
-  $remaining_amount=$row['remaining_amount'];
-  $status=$row['status'];
+   // echo($student_id);
+    $q="SELECT * from fees_structure where student_id='$student_id'";
+    $query=mysqli_query($con,$q) or die(mysqli_error($con));
+    while($row=mysqli_fetch_array($query)){
+      $course=$row['course'];
+      $subject=$row['subject'];
+      $fees_type=$row['fees_type'];
+      $total_fees=$row['total_fees'];
+      $paying_amount=$row['paying_amount'];
+      $remaining_amount=$row['remaining_amount'];    
+      $status=$row['status'];
+    }
 
-}
+if(isset($_POST['submit'])){
+    $course=$_POST['course'];
+    //echo $course;
+   // echo $student_id;
+    $subject=$_POST['subject'];
+    $fees_type=$_POST['fees_type'];
+    $total_fees=$_POST['total_fees'];
+    $paying_amount=$_POST['paying_amount'];
+    $remaining_amount=$_POST['remaining_amount'];    
+    $status=$_POST['status'];
+    $query="UPDATE fees_structure set course='$course',fees_type='$fees_type',
+    total_fees='$total_fees',paying_amount='$paying_amount', 
+    remaining_amount='$remaining_amount', status='$status' where student_id='$student_id'";
+    // echo $query;
+    $query_run=mysqli_query($con,$query);
+    // echo $query_run;
+    // if($query_run){
+    //   echo "<script>alert('successfully')</script>";
+    // }else{
+    //   echo "<script>alert('not successfully')</script>";
+    // }
   }
-// if (isset($_POST['submit'])) {
-// 	// $student_id=$_POST['student_id'];
-// 	$course=$_POST['course'];
-// 	$subject=$_POST['subject'];
-// 	$fees_type=$_POST['fees_type'];
-//   $total_fees=$_POST['total_fees'];
-//   $paying_amount=$_POST['paying_amount'];
-//   $remaining_amount=$_POST['remaining_amount'];
-//   $status=$_POST['status'];
-// 	$query="INSERT INTO fees_structure(course,subject,fees_type,total_fees,paying_amount,remaining_amount,status)VALUES('$course','$subject','$fees_type','$total_fees','$paying_amount','$remaining_amount','$status')";
-// 	$result=mysqli_query($con,$query);
-// 	if ($result) {
-// 		echo "inserted successfully";
-// 	}
-// 	else
-// 	{
-// 		echo "not inserted successfully";
-// 	}
-// }
 ?>
 <!DOCTYPE html>
 <html>
@@ -185,11 +85,15 @@ while($row=mysqli_fetch_array($query)){
                     </center>	
               </div>
           </div>
+          </form>
+          <form method="POST" action="">
+          <input type="text" name="student_id" value="<?php echo $student_id; ?>" class="form-control" >
          <div class="form-group row">
               <label for="inputEmail4" class="col-sm-2 col-form-label">Standard</label>
               <div class="col-sm-10">
                        <select class="form-control" name="course" id="course" required autofocus>
-                         <option <?php if ($course=='$course'){ echo "selected";} ?> >select</option>
+                         <!-- <option >select</option> -->
+                         <option value="<?php echo $course;?>" hidden><?php echo $course;?></option>
                          <!-- <option>6th</option>
                          <option>7th</option>
                          <option>8th</option>
@@ -199,7 +103,7 @@ while($row=mysqli_fetch_array($query)){
                          <option>12th</option> -->
                        <?php
                          $query=mysqli_query($con,"SELECT * From classes");
-                         while($row=mysqli_fetch_array($query)){
+                         while($row=mysqli_fetch_array($query)){ 
                            echo "<option value='".$row['class']."'>".$row['class']."</option>";
                          }
                          ?>
@@ -210,8 +114,8 @@ while($row=mysqli_fetch_array($query)){
                 <label for="inputPassword3" class="col-sm-2 col-form-label">Subject</label>
                   <div class="col-sm-10">
                       <select class="form-control" name="subject" id="subject">
-                        <option disabled>select</option>
-  
+                        <!-- <option>select</option> -->
+                        <option value="<?php echo $subject;?>" hidden><?php echo $subject;?></option>
                       </select>
                   </div>
             </div>
@@ -231,7 +135,8 @@ while($row=mysqli_fetch_array($query)){
                           ?>  
                   </select> -->
                        <select class="form-control" name="fees_type" id="fees_type">
-                        <option disabled>select</option>
+                        <!-- <option disabled>select</option> -->
+                        <option value="<?php echo $fees_type;?>" hidden><?php echo $fees_type;?></option>
                         <option value="ANNUVAL">Annual</option>
                         <option value="MONTHLY">Monthly</option>
                         <option value="TERM">Term</option>
@@ -242,21 +147,21 @@ while($row=mysqli_fetch_array($query)){
             <div class="form-group row">
                 <label for="inputPassword3" class="col-sm-2 col-form-label"> Total Fees</label>
                 <div class="col-sm-10">
-                  <input type="text" name="total_fees" class="form-control" id="fee" readonly >
+                  <input type="text" name="total_fees" value="<?php echo $total_fees; ?>" class="form-control" id="fee" readonly >
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="inputPassword3" class="col-sm-2 col-form-label">Amount</label>
                 <div class="col-sm-10">
-                  <input type="text" name="paying_amount" value="0"  class="form-control" id="amount">
+                  <input type="text" name="paying_amount" value="<?php echo $paying_amount; ?>" class="form-control" id="amount">
                 </div>
             </div>
             
             <div class="form-group row">
                 <label for="inputPassword3" class="col-sm-2 col-form-label">Remaining Amount</label>
                 <div class="col-sm-10">
-                  <input type="text" name="remaining_amount" class="form-control" id="remain" >
+                  <input type="text" name="remaining_amount" value="<?php echo $remaining_amount; ?>"  class="form-control" id="remain" >
                 </div>
             </div>
 
@@ -264,25 +169,27 @@ while($row=mysqli_fetch_array($query)){
                   <label for="inputPassword3" class="col-sm-2 col-form-label">Fees status</label>
                   <div class="col-sm-10">
                         
-                          <input type="radio" name="status" value="paid">    
-                          <label class="radio-inline col-sm-2">
+                          <input type="radio" name="status" value="paid" <?php if ($status=='paid'){ echo "checked";} ?> >    
+                          <label class="radio-inline col-sm-2" >
                           paid</label> 
-                          <input type="radio" name="status" value="paid">                   
+                          <input type="radio" name="status" value="pending" <?php if ($status=='pending'){ echo "checked";} ?> >                   
                          <label class="radio-inline col-sm-2">pending
                           </label>
                          
-                          <input type="radio" name="status" value="notpaid" checked>
+                          <input type="radio" name="status" value="not paid" <?php if ($status=='not paid'){ echo "checked";} ?> >
                         <label class="radio-inline col-sm-2">Not paid</label>
                           
                         
                   </div>
+                  
             </div>
             <div class="form-group row">
                 <center class="col-sm-12">
                   <input  type="submit" name="submit" class="btn btn-primary">
                 </center>	
             </div>
-         <form>
+            
+        </form>   
       </div>
       <div class="container-footer">
       </div>
