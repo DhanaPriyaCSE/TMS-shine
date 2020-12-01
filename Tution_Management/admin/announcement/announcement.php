@@ -14,6 +14,8 @@
   
   <body>
   <div class="container">
+
+     
             <span class="border border-secondary">
             <nav class="navbar navbar-light bg-light justify-content-between">
               <a class="navbar-brand">Announcement</a>
@@ -209,7 +211,7 @@
         </form>
       </span>
         
-    </div>
+    </div> 
 </body>
 </html>
 <!-- 
