@@ -1,5 +1,5 @@
 <?php
-include "admin_dashboard.php";
+include "nav.php";
 $con=mysqli_connect("localhost","root","","tution_management");
 if (isset($_POST['submit'])) {
   $fees_type=$_POST['fees_type'];

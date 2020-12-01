@@ -1,5 +1,5 @@
 <?php
-include "admin_dashboard.php";
+include "nav.php";
 $con=mysqli_connect("localhost","root","","tution_management");
 if (isset($_POST['submit'])) {
   // $STUDENTID=$_POST["STUDENTID"];
@@ -15,19 +15,23 @@ if (isset($_POST['submit'])) {
   $address=$_POST["address"];
   $parent_no=$_POST["parent_no"];
   $course=$_POST["course"];
-  
-	$reg="INSERT INTO students(first_name,last_name,ph_no,email,dob,gender,course,school,father_name,mather_name,address,parent_no)
-  VALUES('$first_name','$last_name','$ph_no','$email','$dob','$gender','$course','$school','$fa_name','$ma_name','$address','$parent_no')";
-	$query_run=mysqli_query($con,$reg) or die(mysqli_error($con));
-	// if($query_run)
-	// {
-	// echo '<script>alert("ADMISSION SUCCESSFUL")</script>';
-  //   } 
-  //   else
-  //   {
-  //   	echo '<script>alert("ADMISSION  NOT SUCCESSFUL")</script>';
+  $subject=$_POST["subject"];
+  $caste=$_POST["caste"]; 
 
-  //   }
+	$reg="INSERT INTO students(first_name,last_name,ph_no,email,dob,gender,course,subject,caste,school,father_name,mather_name,address,parent_no)
+  VALUES('$first_name','$last_name','$ph_no','$email','$dob','$gender','$course','$subject''$caste',,'$school','$fa_name','$ma_name','$address','$parent_no')";
+	$query_run=mysqli_query($con,$reg) or die(mysqli_error($con));
+	if($query_run)
+	{
+  echo '<script>alert("ADMISSION SUCCESSFUL")</script>';
+  header('Location:../admin/fees_structure.php');
+    } 
+    else
+    {
+      header('Location:../admin/admission.php');
+    	echo '<script>alert("ADMISSION  NOT SUCCESSFUL")</script>';
+
+    }
   }  
 ?>
 <!DOCTYPE html>
@@ -54,7 +58,7 @@ if (isset($_POST['submit'])) {
        </div>
      
        <div class="container-body">
-          <form action=" " method="POST">
+          <form action=" " method="POST" enctype="multipart/form-data">
           <div class="title">Student details</div>
           <div class="form-row top">
             <div class="form-group col-md-6">
@@ -84,28 +88,74 @@ if (isset($_POST['submit'])) {
             <div class="form-group col-md-6">
             <label for="inputPassword3" class="col-sm-2 col-form-label">Gender</label>
                    <div class="col-sm">
-                         <label class="radio-inline ">
-                           <input type="radio" name="gender">&nbsp;Male
-                         </label>
-                         <label class="radio-inline ">
-                           <input type="radio" name="gender">&nbsp;Female
-                         </label>
-                   </div>
+                   <input type="radio" name="gender" value="male">
+                    <label class="radio-inline ">male</label>
+                    <input type="radio" name="gender" value="female">  
+                    <label class="radio-inline ">female</label>    
+            </div>
             </div>
          </div>
          <div class="form-row">
             <div class="form-group col-md-6">
               <label for="inputEmail4">Standard</label>
-              <div>
-                       <select class="form-control" name="course">
-                         <option disabled>select</option>
+               <div>
+                       <select class="form-control" name="course" id="course" required autofocus>
+                        <option >select</option>
                          <option>6th</option>
                          <option>7th</option>
                          <option>8th</option>
                          <option>9th</option>
                          <option>10th</option>
                          <option>11th</option>
-                         <option>12th</option>
+                         <option>12th</option>  
+                          <?php
+                         $query=mysqli_query($con,"SELECT * From classes");
+                         while($row=mysqli_fetch_array($query)){
+                           echo "<option value='".$row['class']."'>".$row['class']."</option>";
+                         }
+                         ?> 
+                       </select>
+                   </div>
+
+                   <!-- <div class="col-sm-10">
+                       <select class="form-control" name="course" id="course" required autofocus>
+                         <option >select</option>
+                         <option>6th</option>
+                         <option>7th</option>
+                         <option>8th</option>
+                         <option>9th</option>
+                         <option>10th</option>
+                         <option>11th</option>
+                         <option>12th</option> 
+                       <?php
+                         $query=mysqli_query($con,"SELECT * From classes");
+                         while($row=mysqli_fetch_array($query)){
+                           echo "<option value='".$row['class']."'>".$row['class']."</option>";
+                         }
+                         ?>
+                       </select>
+                   </div> -->
+            </div>
+            <div class="form-group col-md-6">
+              <label for="inputEmail4">Subject</label>
+              <div>
+                       <select class="form-control" name="subject" id="subject">
+                         <option >--Select Subject--</option>
+                       </select>
+                   </div>
+            </div>
+            
+         </div>
+         <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="inputEmail4">Caste</label>
+              <div>
+                       <select class="form-control" name="caste">
+                         <option>--Select--</option>
+                         <option>BC</option>
+                         <option>MBC</option>
+                         <option>SC/ST</option>
+                         <option>others</option>
                        </select>
                    </div>
             </div>
@@ -132,18 +182,24 @@ if (isset($_POST['submit'])) {
               <label for="inputPassword4">Parents No.</label>
               <input type="text" class="form-control" id="inputPassword4" name="parent_no" placeholder="Parents No.">
             </div>
+            
             <div class="form-group col-md-6">
               <label for="inputPassword4">Address</label>
               <textarea class="form-control" rows="5" id="comment" placeholder="enter your address" name="address"></textarea>
             </div>
+
+            <div class="form-group col-md-6">
+               <label for="inputPassword3" class="col-sm-2 col-form-label">Photo</label>
+               <div class="col-sm-10">
+                 <input type="file"  class="form-control" id="inputPassword3">
+               </div>
+           </div> 
          </div>
         
              <div class="form-group row">
-             <!-- <a href="add_fees.php" > -->
                   <center class="col-sm-12">
-                        <button  type="button" Value="Next" id="next" class="btn btn-primary" > Next</button>
-                  </center>	
-              <!-- </a> -->
+                        <input type="submit" id="next" value="Next" name="submit" class="btn btn-warning">
+                      </center>	
              </div>
           <form>
        </div>
@@ -151,11 +207,34 @@ if (isset($_POST['submit'])) {
        </div>
      </div>
  
-     <script type="text/javascript">
-    alert($email); 
-    document.getElementById('next').onclick= function(){
-    location.href="../admin/add_fees.php";
-  }
+  
+
+<script type="text/javascript" src="../js/jquery-1.11.2.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script language="javascript" type="text/javascript">
+$(document).ready(function(){
+  // alert("hello");
+  $("#course").change(function(){
+    // alert("hello");
+    var course = $(this).val();
+    alert(course);
+    $.ajax({
+      url: 'get_subject_ajax.php',
+      type: 'POST',
+      data: 'course='+course,
+      success: function(data){
+        var subject = $.parseJSON(data);
+        $('#subject').html(subject);
+      }
+    });
+  });
+  $("#subject").change(function(){
+  //  alert("hello");
+    var subject = $(this).val();
+    var course = $('#course').val();
+  });
+});
 </script>
 </body>
 </html>

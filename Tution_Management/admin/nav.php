@@ -7,14 +7,13 @@
         <!-- BOX ICONS CSS-->
         <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
         <link href='../css/nav.css' rel='stylesheet'>
-
         <title>TUITION MANAGEMENT</title>
     </head>
     <form action="" method="POST">
     <body id="body">
-        <div class="l-navbar" id="navbar">
+        <div class="l-navbar" id="navbar" >
             <nav class="nav">
-                <div id="page-wrapper">
+                <div id="page-wrapper" style="overflow:hi">
                     <a href="" class="nav__logo">
                         <img src="assets/icons/logo.svg" alt="" class="nav__logo-icon">
                         <span class="nav__logo-text">SHINE</span>
@@ -75,12 +74,12 @@
                                 Add <br> Fees
                             </span>
                         </a>                  -->
-                    </ul>
-                </div>
-                <a href="index.php" class="nav__link">           
+                        <a href="index.php" class="nav__link">           
                     <i class='bx bx-log-out-circle nav__icon'></i>
                     <span class="nav__text">Close</span>
                 </a>
+                    </ul>
+                </div>
             </nav>
         </div>
         <div id="page-wrapper">

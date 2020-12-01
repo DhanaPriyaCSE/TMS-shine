@@ -1,6 +1,7 @@
 <?php
-include "admin_dashboard.php";
+include "nav.php";
  $msg = ""; 
+ 
 if(isset($_POST['ADD']))
 {
 	$ID=$_POST['ID'];

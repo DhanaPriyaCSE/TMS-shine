@@ -1,7 +1,4 @@
 <?php
-
-
-
 $subject = array(
 			'7th'=>array(
 										'BASIC MATHEMATICS',
@@ -9,8 +6,7 @@ $subject = array(
 										'ENGINEERING PHYSICS(GROUP-1)',
 										'BASIC ENGINEERING DRAWING',
 										'APPLIED MECHANICS',
-										'ENGINEERING WORKSHOP PRACTICE'
-										
+										'ENGINEERING WORKSHOP PRACTICE'			
 							),
 
 			'biomedical'=>array(
@@ -127,7 +123,7 @@ $subject = array(
 			'6th'=>array(
 							
 										'BASIC MATHEMATICS',
-										'ENGLISH',
+										'English',
 										'ENVIRONMENT CONSERVATION & HAZARD MANAGEMENT',
 										'COMPUTER PROGRAMMING',
 										'FUNDAMENTAL OF DIGITAL ELECTRONIC',
